@@ -29,8 +29,8 @@ const index = require('./routes/index');
 app.use('/', index);
 
 app.use('/', require('./routes/index'));
-app.use('/celebrities.routes', require('./routes/celebrities.routes'));
-app.use('/movies.routes', require('./routes/movies.routes'));
+app.use('/', require('./routes/celebrities.routes'));
+app.use('/', require('./routes/movies.routes'));
 
 
 
