@@ -27,9 +27,7 @@ router.get('/celebrities', (req, res, next) => {
     Celebrity.find()
     .then((celebsFromDb) => {
         console.log({celebsFromDb});
-        data = {
-            celebs: celebsFromDb
-        }
+        data = {celebs: celebsFromDb}
         res.render('celebrities/celebrities', data);
     })
     .catch(err => {

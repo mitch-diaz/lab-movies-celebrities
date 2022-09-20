@@ -1,3 +1,4 @@
+const Celebrity = require("../models/Celebrity.model");
 const Movie = require("../models/Movie.model");
 const router = require("express").Router();
 
@@ -66,9 +67,8 @@ router.get('/movies/:movieId', (req, res, next) => {
 // =========== DELETE ============
 
 router.post('/movies/:movieId/delete', (req, res, next) => {
-    const {movieId} = req.params;
 
-    Movie.findByIdAndRemove('movieId')
+    Movie.findByIdAndRemove(req.params.movieId)
     .then(() => {
         res.redirect('/movies/movies');
     })
@@ -80,7 +80,15 @@ router.post('/movies/:movieId/delete', (req, res, next) => {
 
 // =========== UPDATE ============
 
+router.get('/movies/:movieId/edit', (req, res, next) => {
+    
+    Movie.findById(req.params.movieId).then((movie) => {
 
+        Celebrity.find()
+    })
+
+
+})
 
 
 
