@@ -1,5 +1,6 @@
+<br>
 <h2>Create New Movies</h2>
-
+<br>
 <form action="/movies/create" method="post">
 
     <label for="title">
@@ -17,12 +18,22 @@
         <input id="genre-input" type="text" name="genre">
     </label>
 
-    <label for="cast">
-        Cast:
-        <input id="cast-input" type="text" name="cast">
-    </label>
+    <label for="cast">Cast:</label>
+        <select name="cast" id="cast-menu" multiple>
+            <option value="632623d7f0c66147b8e73c97">Tom Cruise</option>
+            <option value="6326240af0c66147b8e73c99">Kutulu</option>
+            <option value="63262430f0c66147b8e73c9b">Kitty Hawk</option>
+            <option value="6326318aa42ef18102090632">Roderick George Toombs, aka "Rowdy" Roddy Piper</option>
+            <option value="632676104cd4f8aeaf595fc3">Free Guy</option>
+        </select>
+        
+    <br>
     <br>
 
     <button>Create Movie</button>
 
 </form>
+
+  
+
+  {{!-- <input id="cast-input" type="text" name="cast"> --}}

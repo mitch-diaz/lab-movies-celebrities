@@ -1,6 +1,4 @@
 const Celebrity = require("../models/Celebrity.model");
-
-// starter code in both routes/celebrities.routes.js and routes/movies.routes.js
 const router = require("express").Router();
 
 router.get('/celebrities/create', (req, res, next) => {
@@ -38,8 +36,6 @@ router.get('/celebrities', (req, res, next) => {
         console.log({err});
     })
 })
-
-
 
 
 
