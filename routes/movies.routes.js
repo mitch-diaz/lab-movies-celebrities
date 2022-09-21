@@ -41,27 +41,18 @@ router.get('/movies', (req, res, next) => {
 
 // *** The only way to get a value from req.params is if you personally set a variable using the :variableName method in the endpoint when creating your route. You then call the value for that parameter by using req.params.variableName
 
+// NEED POPULATE() TO WORK
 router.get('/movies/:movieId', (req, res, next) => {
-    console.log({params: req.params.movieId})
+    console.log({params: req.params.movieId});
 
-    Movie.findById(req.params.movieId)
-    .populate('cast')
-    .then(moviesFromDb => {
-        // console.log({moviesFromDb});
-        movieData = {movies: moviesFromDb}
-        res.render('movies/movie-details', moviesFromDb);
-    }).catch(err => {console.log({err})})
+    Movie.findById(req.params.movieId).populate('cast')
+    .then(movieFromDb => {
+        res.render('movies/movie-details', movieFromDb);
+    })
+    .catch(err => {
+        console.log({err});
+    })
 })
-
-// ================
-// router.get('/movies/:movieId', (req, res, next) => {
-//     const {movieId} = req.params;
-//     console.log({params: req.params.movieId})
-
-//     Movie.findById(movieId)
-//     .then(theMovie => {res.render('movies/movie-details', { movie: theMovie });
-//     }).catch(err => {console.log({err})})
-// })
 
 
 // =========== DELETE ============
@@ -69,7 +60,7 @@ router.get('/movies/:movieId', (req, res, next) => {
 router.post('/movies/:movieId/delete', (req, res, next) => {
 
     Movie.findByIdAndRemove(req.params.movieId)
-    .then(() => {
+    .then((theMovie) => {
         res.redirect('/movies/movies');
     })
     .catch((err) => {
