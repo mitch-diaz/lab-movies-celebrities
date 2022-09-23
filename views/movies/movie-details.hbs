@@ -1,10 +1,13 @@
 <br>
 <h2>Movie Details</h2>
 <br>
-<h5>Title: {{title}} </h5>
-<h5>Genre: {{genre}} </h5>
-<h5>Plot: {{plot}} </h5>
 
+<h5> <b>Title:</b> {{title}} </h5>
+<h5> <b>Genre:</b> {{genre}} </h5>
+<h5> <b>Plot:</b> {{plot}} </h5>
+
+<hr>
+<br>
 <br>
 
 <h2>Cast</h2>
@@ -12,20 +15,22 @@
 <br>
 
 {{#each cast}}
-    <h5>Actor: {{id.name}}</h5>
-    <h5>Occupation: {{id.occupation}}</h5>
-    <h5>Catch Phrase: {{id.catchPhrase}}</h5>
+    <h5> <b>Actor:</b> {{name}}</h5>
+    <h5> <b>Occupation:</b> {{occupation}}</h5>
+    <h5> <b>Catch Phrase:</b> {{catchPhrase}}</h5>
+    <hr>
 {{/each}}
 
+<br>
+
+<a href="/movies/{{id}}/edit"><b>Edit Movie</b></a>
+
+<br>
 <br>
 
 <form action="/movies/{{id}}/delete" method="post">
     <button type="submit">Delete Movie</button>
 </form>
 
-<br>
-<br>
 
-<form action="/movies/{{id}}/edit" method="get">
-    <button type="submit">Edit Movie</button>
-</form>
+

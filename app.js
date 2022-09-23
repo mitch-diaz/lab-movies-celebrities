@@ -14,6 +14,8 @@ const express = require('express');
 const hbs = require('hbs');
 
 const app = express();
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
 
 // ℹ️ This function is getting exported from the config folder. It runs most middlewares
 require('./config')(app);
@@ -31,7 +33,23 @@ app.use('/', index);
 app.use('/', require('./routes/index'));
 app.use('/', require('./routes/celebrities.routes'));
 app.use('/', require('./routes/movies.routes'));
+app.use('/', require('./routes/authroutes'));
 
+
+app.use(
+    session({
+      secret: '123secret',
+      resave: true,
+      saveUninitialized: true,
+      cookie: {
+        maxAge: 600000
+      }, // ADDED code below !!!
+      store: MongoStore.create({
+        mongoUrl: 'mongodb://localhost/lab-movies-celebrities'
+      })
+    })
+  );
+  
 
 
 

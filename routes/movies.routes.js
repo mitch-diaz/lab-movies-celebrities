@@ -1,9 +1,10 @@
-const Celebrity = require("../models/Celebrity.model");
 const Movie = require("../models/Movie.model");
+const Celebrity = require("../models/Celebrity.model");
 const router = require("express").Router();
 
 
-// =========== CREATE ============
+// =========== CREATE A NEW MOVIE ============
+
 router.get('/movies/create', (req, res, next) => {
     res.render('movies/new-movie')
 })
@@ -26,7 +27,8 @@ router.post('/movies/create', (req, res ,next) => {
 })
 
 
-// =========== READ ============
+// =========== READ MOVIES LIST ============
+
 router.get('/movies', (req, res, next) => {
     Movie.find()
     .then((moviesFromDb) => {
@@ -39,17 +41,51 @@ router.get('/movies', (req, res, next) => {
     })
 })
 
-// *** The only way to get a value from req.params is if you personally set a variable using the :variableName method in the endpoint when creating your route. You then call the value for that parameter by using req.params.variableName
+// ============ READ MOVIE DETAILS ============
 
-// NEED POPULATE() TO WORK
 router.get('/movies/:movieId', (req, res, next) => {
     console.log({params: req.params.movieId});
 
-    Movie.findById(req.params.movieId).populate('cast')
+    Movie.findById(req.params.movieId)
+    .populate('cast')
     .then(movieFromDb => {
+        console.log('The clicked on movie: ', movieFromDb);
         res.render('movies/movie-details', movieFromDb);
     })
     .catch(err => {
+        console.log({err});
+    })
+})
+
+
+// =========== UPDATE ============
+
+router.get('/movies/:id/edit', (req, res, next) => {
+    
+    Movie.findById(req.params.id)
+    .then((movieFromDb) => {
+        console.log('Update movie: ', movieFromDb);
+        Celebrity.find(req.params.celebsFromDb)
+        .then((celebsFromDb)=>{
+            console.log('Update celeb: ', celebsFromDb);
+            res.render('movies/edit-movie', movieFromDb)
+        })
+    })
+})
+
+router.post('/movies/:id', (req, res, next)=>{
+    const movieToUpdate = {
+        title: req.body.title,
+        genre: req.body.genre,
+        plot: req.body.plot,
+        cast: req.body.cast
+    }
+
+    Movie.findByIdAndUpdate(req.params.id, movieToUpdate)
+    .then(theUpdatedMovie => {
+        console.log('The Edit: ', theUpdatedMovie);
+        res.redirect(`/movies/${theUpdatedMovie.id}`);
+    }).catch(err => {
         console.log({err});
     })
 })
@@ -60,28 +96,13 @@ router.get('/movies/:movieId', (req, res, next) => {
 router.post('/movies/:movieId/delete', (req, res, next) => {
 
     Movie.findByIdAndRemove(req.params.movieId)
-    .then((theMovie) => {
-        res.redirect('/movies/movies');
+    .then((movieFromDb) => {
+        res.redirect('/movies');
     })
     .catch((err) => {
         console.log({err});
     })
 });
-
-
-// =========== UPDATE ============
-
-router.get('/movies/:movieId/edit', (req, res, next) => {
-    
-    Movie.findById(req.params.movieId).then((movie) => {
-
-        Celebrity.find()
-    })
-
-
-})
-
-
 
 
 module.exports = router;
