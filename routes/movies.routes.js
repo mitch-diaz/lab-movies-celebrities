@@ -1,5 +1,6 @@
 const Movie = require("../models/Movie.model");
 const Celebrity = require("../models/Celebrity.model");
+const User = require("../models/User.model");
 const router = require("express").Router();
 
 
@@ -36,8 +37,8 @@ router.get('/movies', (req, res, next) => {
         movieData = {movies: moviesFromDb}
         res.render('movies/movies', movieData);
     })
-    .catch(err => {
-        console.log({err});
+    .catch(error => {
+        console.log({error});
     })
 })
 
@@ -52,8 +53,8 @@ router.get('/movies/:movieId', (req, res, next) => {
         console.log('The clicked on movie: ', movieFromDb);
         res.render('movies/movie-details', movieFromDb);
     })
-    .catch(err => {
-        console.log({err});
+    .catch(error => {
+        console.log({error});
     })
 })
 
@@ -85,8 +86,8 @@ router.post('/movies/:id', (req, res, next)=>{
     .then(theUpdatedMovie => {
         console.log('The Edit: ', theUpdatedMovie);
         res.redirect(`/movies/${theUpdatedMovie.id}`);
-    }).catch(err => {
-        console.log({err});
+    }).catch(error => {
+        console.log({error});
     })
 })
 
@@ -99,8 +100,8 @@ router.post('/movies/:movieId/delete', (req, res, next) => {
     .then((movieFromDb) => {
         res.redirect('/movies');
     })
-    .catch((err) => {
-        console.log({err});
+    .catch((error) => {
+        console.log({error});
     })
 });
 

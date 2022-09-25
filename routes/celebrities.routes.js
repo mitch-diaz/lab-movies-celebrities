@@ -16,7 +16,7 @@ router.post('/celebrities/create', (req, res ,next) => {
     Celebrity.create(celebsToCreate)
     .then(newlyCreatedCeleb => {
         res.redirect('/celebrities/celebrities', {newlyCreatedCeleb});
-    }).catch(err => {
+    }).catch(error => {
         res.redirect('/celebrities/create');
     })
 })
@@ -30,8 +30,8 @@ router.get('/celebrities', (req, res, next) => {
         data = {celebs: celebsFromDb}
         res.render('celebrities/celebrities', data);
     })
-    .catch(err => {
-        console.log({err});
+    .catch(error => {
+        console.log({error});
     })
 })
 

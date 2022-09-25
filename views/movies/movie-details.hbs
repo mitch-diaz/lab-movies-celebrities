@@ -23,14 +23,22 @@
 
 <br>
 
-<a href="/movies/{{id}}/edit"><b>Edit Movie</b></a>
+{{#if theUser}}
+    <a href="/movies/{{id}}/edit"><b>Edit Movie</b></a>
 
-<br>
-<br>
+    <br><br>
 
-<form action="/movies/{{id}}/delete" method="post">
-    <button type="submit">Delete Movie</button>
-</form>
+    <form action="/auth/user-profile/{{id}}" method="post">
+        <button type="submit">Favorites ⭐️</button>
+    </form>
+
+    <br><br>
+
+    <form action="/auth/user-profile/{{id}}" method="post">
+        <button type="submit">Delete Movie 🗑</button>
+    </form>
+{{/if}}
+
 
 
 

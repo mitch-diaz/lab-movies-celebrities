@@ -31,5 +31,12 @@
     <br>
     <br>
 
-    <button type="submit" >Save</button>
+    <button type="submit" >Create Account</button>
 </form>
+<br>
+<p>* Required field</p>
+<br>
+
+{{#if errorMessage}}
+    <p class="error">{{errorMessage}}</p>
+{{/if}}

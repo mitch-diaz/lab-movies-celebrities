@@ -6,6 +6,13 @@ const userSchema = new Schema({
     lastName: String,
     username: String,
     password: String,
+    favorites: {type: [
+        {
+            type: Schema.Types.ObjectId, 
+            ref: 'Movie'
+        }
+      ]
+    }
 }, { 
     timestamps: true
 })

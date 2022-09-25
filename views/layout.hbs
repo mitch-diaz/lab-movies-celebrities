@@ -13,13 +13,24 @@
   <body>
 
     <nav>
-      <a href="/">Home | </a>
-      <a href="/celebrities">Celebrity List | </a>
-      <a href="/movies">Movie List | </a>
-      <a href="/celebrities/create">Create New Celebrity | </a>
-      <a href="/movies/create">Create New Movie |</a>
-      <a href="/login">Login |</a>
-      <a href="/signup">Sign up</a>
+      <a href="/">Home</a> <span> | </span>
+      <a href="/signup">Sign up</a> <span> | </span>
+      
+      {{#unless theUser}}
+        <a href="/login">Login</a>
+      {{/unless}}
+
+      {{#if theUser}}
+        <a href="/user-profile">Profile</a> <span> | </span>
+        <a href="/celebrities">Celebrity List</a> <span> | </span>
+        <a href="/movies">Movie List</a> <span> | </span>
+        <a href="/celebrities/create">Add New Celebrity</a> <span> | </span>
+        <a href="/movies/create">Add New Movie</a>
+        <form action="/logout" method="post" name="logout">
+        <br>
+          <button>Logout</button>
+        </form>
+      {{/if}}
     </nav>
 
     <br>
