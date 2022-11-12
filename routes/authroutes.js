@@ -79,30 +79,74 @@ router.get('/user-profile', (req, res, next)=>{
   // ========== USER LIKES ===========
 // =-=-=-=-=-=-=-=- update user model with movie likes =-=-=-=-=-=-=-=-=-=-=
 
-router.get('/user-profile/:id', (req, res, next) => {
-    User.find(req.params.theUser)
-    .then((theUser) => {
-        console.log('Logged on user: ', theUser);
-        res.render('auth/user-profile', movieFromDb)
-        Movie.findById(req.params.id)
-        .then((movieFromDb)=>{
-            console.log('Favorite movie: ', movieFromDb);
-            res.render('auth/user-profile', movieFromDb)
-        })
-    })
-})
+// router.get('/user-profile/:id', (req, res, next) => {
+//     User.findById(req.params.theUser)
+//     .then((theUser) => {
+//         console.log('Logged on user: ', theUser);
+//         Movie.findById(req.params.id)
+//         .then((movieFromDb)=>{
+//             console.log('Favorite movie: ', movieFromDb);
+//             res.render('auth/user-profile', movieFromDb)
+//         })
+//     })
+// })
 
-router.post('/user-profile/:id', (req, res, next)=>{
-  const movieFavorite = {favorites: req.body.favorites}
+// router.post('/user-profile/:id', (req, res, next)=>{
+//   const movieFavorite = {favorites: req.body.favorites}
 
-  User.findByIdAndUpdate(req.params.id, movieFavorite)
-  .then(theMovieFav => {
-      console.log('The favorite: ', theMovieFav);
-      res.redirect(`/user-profile/${theMovieFav.id}`);
-  }).catch(error => {
-      console.log({error});
+//   User.findByIdAndUpdate(req.params.id, movieFavorite)
+//   .then(theMovieFav => {
+//       console.log('The favorite: ', theMovieFav);
+//       res.redirect(`/user-profile/${theMovieFav.id}`);
+//   }).catch(error => {
+//       console.log({error});
+//   })
+// })
+
+
+router.get('/user-profile/:id', (req, res ,next)=>{
+  Movie.find()
+  .then((allTheMovies)=>{
+      User.findById(req.params.userID)
+      .then((theUser)=>{
+          let myMovies = [];
+          let otherMovies = [];
+          allTheMovies.forEach((eachMovie)=>{
+              
+              if(theUser.favorites.includes(eachMovie.id)){
+                  console.log("its the same")
+                  console.log(eachMovie.name);
+                  myMovies.push(eachMovie);
+              } else {
+                  otherMovies.push(eachMovie);
+              }
+          })
+
+          res.render('user-profile',
+          {
+              myMovies: myMovies,
+              otherMovies: otherMovies, 
+              userID: req.params.userID
+          });
+      })
+  })
+  .catch((err)=>{
+      console.log(err);
   })
 })
+
+router.post('/:userID/user-profile', (req, res, next)=>{
+  let ids = req.body.movieID;
+      User.findByIdAndUpdate(req.params.userID, 
+          {movies: ids})
+          .then((result)=>{
+              res.redirect('/user-profile');
+          })
+          .catch((err)=>{
+              console.log(err)
+          })
+})
+
   
 
   

@@ -59,7 +59,7 @@ router.get('/movies/:movieId', (req, res, next) => {
 })
 
 
-// =========== UPDATE ============
+// =========== UPDATE MOVIE ============
 
 router.get('/movies/:id/edit', (req, res, next) => {
     

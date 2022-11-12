@@ -22,16 +22,24 @@
     <br>
 
     <label for="cast">Cast:</label>
+    <select name="cast" id="cast-menu">
+        <option value="" disabled="disabled" selected="selected">--Please choose an option--</option>
+        <option value="632623d7f0c66147b8e73c97">Tom Cruise</option>
+        <option value="632b4fd451edefd878b80164">Matthew Broderick</option>
+        <option value="632b529651edefd878b80172">Peter Sellers</option>
+        <option value="6326318aa42ef18102090632">Roderick George Toombs - aka "Rowdy" Roddy Piper</option>
+        <option value="632b518151edefd878b8016e">Ryan Reynolds</option>
+        <option value="632e0e4bc6976dd6441cd683">Martin Freeman</option>
+        <option value="632bdf9ee62cdee3cb90bcff">No One</option>
+    </select>
+
+    {{!-- <label for="cast">Cast:</label><br>
         <select name="cast" id="cast-menu" multiple>
-            <option value="632623d7f0c66147b8e73c97">Tom Cruise</option>
-            <option value="632b4fd451edefd878b80164">Matthew Broderick</option>
-            <option value="632b529651edefd878b80172">Peter Sellers</option>
-            <option value="6326318aa42ef18102090632">Roderick George Toombs - aka "Rowdy" Roddy Piper</option>
-            <option value="632b518151edefd878b8016e">Ryan Reynolds</option>
-            <option value="632e0e4bc6976dd6441cd683">Martin Freeman</option>
-            <option value="632bdf9ee62cdee3cb90bcff">No One</option>
-        </select>
-        
+            {{#each cast}}
+                <option value={{_id}} {{name}}></option>
+            {{/each}}
+        </select> --}}
+
     <br>
     <br>
 
